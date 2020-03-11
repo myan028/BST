@@ -142,8 +142,27 @@ bool searchTree(Node* head, Node* headtemp, int number){
 
 
 
-Node* deleteNode(Node* head, int number){ //delete method
-	//how do i do this............?????????
+Node* deleteNode(Node* current, int number){ //delete method
+	
+	//if tree only has 1 node, delete
+	
+	//if current has no children, delete
+	  
+	
+	//if only a left child of current, current->getParent->setLeft(current->getLeft)
+	//if only a right child of current, current->getParent->setRight(current->getRight)
+	//////////////////////////NOPE
+	
+	
+	//if current->getRight == NULL, current->getParent = current->getLeft
+	//else if current->getRight->getLeft == NULL, current->getParent = current->getLeft
+	
+	
+	
+	
+	
+	//make cases for if current is the root
+	
 }
 
 
