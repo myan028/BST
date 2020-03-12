@@ -88,18 +88,18 @@ void printTree(Node* head, int space){ //https://www.geeksforgeeks.org/print-bin
 		return;
 	}
     
-    //increase distance between levels  
+    //increase distance between levels
     space += COUNT;
   
-    //process right child first  
+    //process right child first
     printTree(head->getRight(), space);
   
-    //print current node after space
+    //print current node after space 
     cout << endl;  
-    for (int i = COUNT; i < space; i++)  
+    for (int i = COUNT; i < space; i++)
         cout << " ";
-    cout << head->getData() << "\n";  
-  
+    cout << head->getData() << "\n";
+	
     printTree(head->getLeft(), space); //process left child
 	
 }
@@ -138,7 +138,7 @@ bool searchTree(Node* head, Node* headtemp, int number){
 
 
 
-Node* deleteNode(Node* head, int number){ //delete method //idea for node class delete method credit: Eric Fan
+Node* deleteNode(Node* head, int number){ //delete method //idea to use node class method credit: Jason Shi
   	
 	if(head->getLeft() == NULL & head->getRight() == NULL){ //primary case
 		head->setData(NULL);
@@ -204,14 +204,11 @@ int main(){
 		inFile.open(filename);
 		
 		int n = 0;
-		iswhile(inFile >> n){
 		
+		while(inFile >> n){
 			stor[index] = n; //fill stor with file
 			index++;
 		}
-		/*for(int i = 0; i < stor.length; i++){
-			cout << stor[i];
-		}*/
 
 	}
 	
@@ -220,7 +217,6 @@ int main(){
 	headtemp = head;
 	
 	for(int i = 0; i < index; i++){
-		//if(stor[i] == ')
 		addNode(head, stor[i]);
 	}	
 	
