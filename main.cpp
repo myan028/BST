@@ -13,15 +13,13 @@ This code runs a Binary Search Tree algorithm. The user is able to add via conso
 search, or delete.
 */
 
-//ONLY DELETE IS LEFT
-
 using namespace std;
 
 int COUNT = 10;
 
 
 
-Node* smallestNode(Node* node){ //get the smallest node
+Node* smallestNode(Node* node){ //get the smallest node for delete
 	Node* current = node;
 	while(current->getLeft()!=NULL){
 		current = current->getLeft();
@@ -96,15 +94,13 @@ void printTree(Node* head, int space){ //https://www.geeksforgeeks.org/print-bin
     //process right child first  
     printTree(head->getRight(), space);
   
-    //print current node after space  
-    //count  
+    //print current node after space
     cout << endl;  
     for (int i = COUNT; i < space; i++)  
         cout << " ";
     cout << head->getData() << "\n";  
   
-    //process left child  
-    printTree(head->getLeft(), space); 
+    printTree(head->getLeft(), space); //process left child
 	
 }
 
@@ -142,27 +138,34 @@ bool searchTree(Node* head, Node* headtemp, int number){
 
 
 
-Node* deleteNode(Node* current, int number){ //delete method
-	
-	//if tree only has 1 node, delete
-	
-	//if current has no children, delete
-	  
-	
-	//if only a left child of current, current->getParent->setLeft(current->getLeft)
-	//if only a right child of current, current->getParent->setRight(current->getRight)
-	//////////////////////////NOPE
-	
-	
-	//if current->getRight == NULL, current->getParent = current->getLeft
-	//else if current->getRight->getLeft == NULL, current->getParent = current->getLeft
-	
-	
-	
-	
-	
-	//make cases for if current is the root
-	
+Node* deleteNode(Node* head, int number){ //delete method //idea for node class delete method credit: Eric Fan
+  	
+	if(head->getLeft() == NULL & head->getRight() == NULL){ //primary case
+		head->setData(NULL);
+	}
+	else if(head->getData() > number){ //if number is less than current
+		head->setLeft(deleteNode(head->getLeft(), number));
+ 	}
+	else if(number > head->getData()){ //if number is greater than current
+		head->setRight(deleteNode(head->getRight(), number));
+	}
+	else{ //null children cases
+		if(head->getLeft() == NULL){
+			Node* temp = head->getRight();
+			free(head);
+			return temp;
+		}
+		else if(head->getRight() == NULL){
+			Node* temp = head->getLeft();
+			free(head);
+			return temp;
+		}
+		
+		Node* temp = smallestNode(head->getRight()); //find smallest for swap
+		
+		head->setData(temp->getData()); //delete and replace
+		head->setRight(deleteNode(head->getRight(), temp->getData()));
+	}
 }
 
 
@@ -201,11 +204,14 @@ int main(){
 		inFile.open(filename);
 		
 		int n = 0;
+		iswhile(inFile >> n){
 		
-		while(inFile >> n){
 			stor[index] = n; //fill stor with file
 			index++;
 		}
+		/*for(int i = 0; i < stor.length; i++){
+			cout << stor[i];
+		}*/
 
 	}
 	
@@ -214,6 +220,7 @@ int main(){
 	headtemp = head;
 	
 	for(int i = 0; i < index; i++){
+		//if(stor[i] == ')
 		addNode(head, stor[i]);
 	}	
 	
